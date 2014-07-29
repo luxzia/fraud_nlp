@@ -34,7 +34,7 @@ def write_word_vectors(dataframe, word_model):
     features_with_words = vectorize_words(dataframe, word_model, features)
 
     for i in dataframe.index:
-        reln = dataframe['relation-id'].ix[i]
+        reln = dataframe['relation_id'].ix[i]
         features_with_words[i][100+reln] = 1
 
         pos_w1 = dataframe['pos_word_1_id'].ix[i]
