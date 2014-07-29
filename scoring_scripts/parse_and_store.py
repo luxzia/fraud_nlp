@@ -9,7 +9,7 @@ server = jsonrpclib.Server("http://localhost:8080")
 
 
 def store_and_parse(document):
-	
+
 	""" 
 	INPUT: dataframe with event id and description
 	OUTPUT: sql inserts into database
@@ -26,7 +26,7 @@ def store_and_parse(document):
 		result = loads(server.parse(document))
 	sentences = result['sentences']
 	print "Length of sentences :: ", len(sentences)
-	dependencies_list = pr.parse_document(sentences)
+	dependencies_list = ps.parse_document(sentences)
 	new_frame = cd.store_the_dependencies(dependencies_list)
 	return new_frame
 

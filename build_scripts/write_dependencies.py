@@ -18,14 +18,13 @@ def make_ascii(s):
 		val = s
 	return val
 
-def parse_dependencies(dependency_list_of_lists, word_list, sentence_id):
+def parse_dependencies(dependency_list_of_lists, event_id, acct_type, sentence_id, word_list):
 
 	"""
 	INPUT: (1) a list of lists. Each sublist contains a triple with a dependency relation and the 
-	two related words, (2) a list of lists containing the words in the sentence and parser output
-	including part of speech tags (3) a sentence_id to id which sentence the dependency belongs to 
-	OUTPUT: a list of lists.  Each sublist will contain the relation, the two related words
-	and their respective parts of speech
+	two related words (2) a list that is appended to 
+	OUTPUT: a list of lists.  Each sublist will contain the event id, sentence id, the relation,
+	the two related word and their respective parts of speech
 	"""
 
 	dependency_list = []
@@ -34,6 +33,8 @@ def parse_dependencies(dependency_list_of_lists, word_list, sentence_id):
 				this_word_1 = make_ascii(dependency_list_of_lists[i][1])
 				this_word_2 = make_ascii(dependency_list_of_lists[i][2])
 				
+				dependency_list.append(event_id)
+				dependency_list.append(acct_type)
 				dependency_list.append(sentence_id)
 				dependency_list.append(this_relation)
 				dependency_list.append(this_word_1)
