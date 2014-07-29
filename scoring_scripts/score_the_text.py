@@ -1,18 +1,24 @@
-import DOC WITH CLEAN_TEXT
-import DOC WITH STORE AND PARSE
-import WORD_VECTORS
+import clean_text as ct  
+import parse_and_store as ps 
+import word_vectors as wv 
 import calculate_score as cs
 import pickle
 import gensim
 
 description_model = gensim.models.Word2Vec.load('word_model')
 
-if __name__ = "__main__"
+"""
+INPUT: the raw text to be analyzed
+OUTPUT: a string saying whether the text is fraudulent or not
+"""
+
+if __name__ = "__main__":
+
 	document = raw_input("enter the document to be analyzed:  ")
-	clean_doc = ??.clean_text(document)
-	??.store_and_parse( document, description_model ) --> (1) dataframe with event_id, sentence_id, relation, word_1, word_2, pos_word_1, pos_word_2, acct_type
-	??.vectorize --> feature matrix with binarized relation, pos_word_1, pos_word_2, word vectors
+	clean_doc = ct.clean_text(document)
+	doc_df = ps.store_and_parse(clean_doc)
+	features = wv.write_word_vectors(doc_df, description_model) 
 	model = pickle.load( open( 'MODEL', 'rb' ) )
-	model.predict(features) --> y_pred
-	create scoring dataframe with y_pred
-	cs.calculate_frauds(y_pred)
+	y_pred = model.predict(features)
+	scoring_df = cs.scoring_df(doc_df, y_pred)
+	cs.calculate_frauds(scoring_df)

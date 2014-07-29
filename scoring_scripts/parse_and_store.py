@@ -9,6 +9,7 @@ server = jsonrpclib.Server("http://localhost:8080")
 
 
 def store_and_parse(document):
+	
 	""" 
 	INPUT: dataframe with event id and description
 	OUTPUT: sql inserts into database
@@ -19,7 +20,8 @@ def store_and_parse(document):
 	'"""
 
 	result = []
-	# while loop necessary because of the parse server timing out occasionally and needing to be hti again
+	# while loop necessary because of the parse server timing out occasionally and 
+	# needing to be hit again
 	while type(result) == list:
 		result = loads(server.parse(document))
 	sentences = result['sentences']
