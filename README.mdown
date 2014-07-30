@@ -30,7 +30,6 @@ This project is meant as a proof of concept model, not a working application.
 ####Database
 * Postgres
 
-NOTE: This project is meant as a proof of concept model, not a working application.  
 
 
 
