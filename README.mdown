@@ -5,9 +5,9 @@
 
 Language use is constant.  While other indicators for fraud, such as IP addresses, bank accounts, can be changed, language use is constant and indicative.  
 
-The inspiration for this project comes from an in-class case study we did on fraud detection.  Bag of words approaches and text length in text that appeared in one field per event seemed to show some promise for fraud detection.  As a formally-trained linguist, I wanted to use some more advanced NLP/deep learning technqiues.  
+The inspiration for this project comes from an in-class case study we did on fraud detection.  Bag of words approaches and text length showed some promising results for fraud detection. Based on that, I wanted to see if some deep learning approaches with language would yield better results as it would give a larger feature set with context in language use.  As indicated in the above quote, authors have characteristic writing that is unique.  If the use of language in perpetuating fraud could be thought of as a genre, I wanted to try to find via computational means the patterns of usage that indicated this.  
 
-For featurization of the text descriptions, I used the Stanford Core Parser for sytnactic dependencies and part-of-speech tags, while I vectorized the words using Word2Vec.  I created a sparse matrix with dependency within a sentence represented by a row and then built a model using scikit-learn's logistic regression classifier. 
+For featurization of the text descriptions, I chose the Stanford Core Parser because it gave me a rich feature set should I choose to extend it further than I did for the current model. In this model, I have used only the syntactic depdendencies and part-of-speech tags given by the parser. Word2Vec was used for the featurization of the words themselves - it's great advantage is that it trains very quickly and is very useable with the gensim library within python.  I then created a sparse matrix with a single dependency within a sentence represented by a row and then built a model using scikit-learn's logistic regression classifier. 
 
 The scoring in this model is such that every sentence is given a score by averaging the binary fraud/not fraud scores of its dependencies.  Every event is then scored as fraudulent given that one sentence within is indicated as fraudulent.  
 
