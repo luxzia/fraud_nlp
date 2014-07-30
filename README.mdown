@@ -1,5 +1,19 @@
 #The Language of Fraud
 
+>“There’s a kind of fascination with the thought that a computer sleuth can discover things that are hidden there in the text. Things about the style of the writing that the reader can’t detect and the author can’t do anything about, a kind of signature or DNA or fingerprint of the way they write.”
+>                                             -- Peter Millican on use of forensic linguistics
+
+Language use is constant.  While other indicators for fraud, such as IP addresses, bank accounts, can be changed, language use is constant and indicative.  
+
+The inspiration for this project comes from an in-class case study we did on fraud detection.  Bag of words approaches and text length in text that appeared in one field per event seemed to show some promise for fraud detection.  As a formally-trained linguist, I wanted to use some more advanced NLP/deep learning technqiues.  
+
+For featurization of the text descriptions, I used the Stanford Core Parser for sytnactic dependencies and part-of-speech tags, while I vectorized the words using Word2Vec.  I created a sparse matrix with dependency within a sentence represented by a row and then built a model using scikit-learn's logistic regression classifier. 
+
+The scoring in this model is such that every sentence is given a score by averaging the binary fraud/not fraud scores of its dependencies.  Every event is then scored as fraudulent given that one sentence within is indicated as fraudulent.  
+
+The scripts for building the model are in the build scripts folder and the scoring scripts are within the scoring scripts folder. 
+
+This project is meant as a proof of concept model, not a working application.  
 ###Required technologies for this product:
 
 ####NLP
@@ -16,9 +30,7 @@
 ####Database
 * Postgres
 
-The inspiration for this project comes from an in-class case study we did on fraud detection.  Bag of words approaches and text length in text that appeared in one field per event seemed to show some promise for fraud detection.  As a formally-trained linguist, I wanted to use some more advanced NLP technqiues.  The Stanford Core Parser provides an excellent wealth of linguistic information on a piece of text, including dependencies and part-of-speech tags.  The Word2Vec modeling takes a corpus as input and returns each word within that corpus as a vector.
-
-This project is meant as a proof of concept model, not a working application.  
+NOTE: This project is meant as a proof of concept model, not a working application.  
 
 
 

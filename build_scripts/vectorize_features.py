@@ -1,29 +1,26 @@
-from sqlalchemy import engine
-from pandas.io import read_sql
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-engine = create_engine('postgresql://postgres@localhost/fraud_detection')
-dependency_df = pd.read_sql_table('dependency_features', engine)
 
-def vectorize_words(dataframe, word_model, numpy_array): 
+def vectorize_words(dataframe, word_model, feature_array): 
 
     """
     INPUT: a dataframe with the features to be vectorized and a Word2Vec model 
-    OUTPUT: a numpy array with the word vectors 
+    OUTPUT: a two-dimensional numpy array with the word vectors 
     """
 
     for i in dataframe.index:
-            this_word_1 = dataframe['word_1'].ix[i]
-            this_word_2 = dataframe['word_1'].ix[i]
+        this_word_1 = dataframe['word_1'].ix[i]
+        this_word_2 = dataframe['word_1'].ix[i]
 
-            if this_word_1 in word_model.vocab:
-                numpy_array[i][0:50] = word_model[this_word_1]
+        if this_word_1 in word_model.vocab:
+            feature_array[i][0:50] = word_model[this_word_1]
 
-            if this_word_2 in word_model.vocab:
-               numpy_array[i][50:100] = word_model[this_word_2]
-
+        if this_word_2 in word_model.vocab:
+            feature_array[i][50:100] = word_model[this_word_2]
+    return feature_array
 
 def build_id_column(dataframe, dataframe_column, dictionary, name):
 	
